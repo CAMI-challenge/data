@@ -1,4 +1,4 @@
 Submission	Software	Version	ShortReadsUsed	LongReadsUsed	SamplesUsed	Description
-<link>	MEGAHIT	v1.1.4	True	False	1-64	Combined assembly, all 64 samples, only short reads
-<link>	metaSPAdes	v3.13.0	True	False	1-64	Combined assembly, all 64 samples, only short reads
-<link>	metaSPAdes	v3.13.0	True	True 1-64	Combined assembly, all 64 samples, short and long reads
+DOI	MEGAHIT	v1.1.4	True	False	1-64	Combined assembly, all 64 samples, only short reads
+DOI	metaSPAdes	v3.13.0	True	False	1-64	Combined assembly, all 64 samples, only short reads
+DOI	metaSPAdes	v3.13.0	True	True 1-64	Combined assembly, all 64 samples, short and long reads
