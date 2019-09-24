@@ -41,6 +41,7 @@ Additionally, your submission will be visible also on the CAMI Community site.
 ## Step 2: Provide structured metadata
 
 Metadata and links to the raw data are stored in this repository in tab-separated files, one table per dataset (e.g. [CAMI2/Toy/MouseGut/assembly.tsv](https://github.com/CAMI-challenge/data/blob/master/CAMI2/Toy/MouseGut/assembly.tsv)).
+
 Please add your metadata by following the [GitHub flow](https://guides.github.com/introduction/flow/): clone the repository, add one or more row(s) to the appropriate table(s), and create a pull request.
 We will review your pull request (and your files on zenodo) as soon as possible, and ask question - if needed.
 
