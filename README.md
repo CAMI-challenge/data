@@ -31,7 +31,7 @@ Click on **Publish** and confirm that you want to assign a DOI to your submissio
 Congratulations, you successfully uploaded your results to zenodo!
 ![foo](https://raw.githubusercontent.com/CAMI-challenge/data/master/_tutorial/z09.png)
 
-We will review your submission (after you compelted Step 2) and upon approval the CAMI Community badge will appear next to your submission.
+We will review your submission (after you completed Step 2) and upon approval the CAMI Community badge will appear next to your submission.
 ![foo](https://raw.githubusercontent.com/CAMI-challenge/data/master/_tutorial/z10.png)
 
 Additionally, your submission will be visible also on the CAMI Community site.
@@ -40,7 +40,7 @@ Additionally, your submission will be visible also on the CAMI Community site.
 
 ## Step 2: Provide structured metadata
 
-Metadata and links to the raw data are stored in this repository in tab-seperated files, one table per dataset.
+Metadata and links to the raw data are stored in this repository in tab-separated files, one table per dataset.
 
 Please add your metadata by following the [GitHub flow](https://guides.github.com/introduction/flow/): clone the repository, add one or more row(s) to the appropriate table(s), and create a pull request.
 We will review your pull request (and your files on zenodo) as soon as possible, and ask question - if needed.
