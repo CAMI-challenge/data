@@ -1,0 +1,4 @@
+DOI	DirectLink	Software	Version	ShortReadsUsed	LongReadsUsed	SamplesUsed	Description
+xxx	URL	MEGAHIT	v1.1.4	True	False	1-64	Combined assembly, all 64 samples, only short reads
+xxx	URL	metaSPAdes	v3.13.0	True	False	1-64	Combined assembly, all 64 samples, only short reads
+xxx	URL	metaSPAdes	v3.13.0	True	True	1-64	Combined assembly, all 64 samples, short and long reads

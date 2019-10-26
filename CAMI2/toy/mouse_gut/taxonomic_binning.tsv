@@ -1,0 +1,3 @@
+DOI	DirectLink	Software	Version	ShortReadsUsed	LongReadsUsed	SamplesUsed	Description	CommandUsed	FileName	Creator	ORCID	Affiliation
+xxx	xxx	Kraken	v2.0.8 beta	True	False	1-64	Taxonomic profiling, all 64 samples, only short reads					
+xxx	xxx	PhyloPythiaS+	V1.4	False	False	gold standard pooled assembly	Taxonomic binning of gold standard pooled assembly	ppsp -c cami2_marine_refseq93_silva132_maxLeafClades800.cfg -n -g -o s16 mg -t -p c -r -s	mouse_gut_refseq93_silva132_maxLeafClades800.binning	Meyer, Fernando	0000-0002-0901-3815	Helmholtz Centre for Infection Research
