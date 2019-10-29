@@ -3,6 +3,7 @@ import requests
 import argparse
 import logging
 import sys
+import os
 
 
 BASE_URL = 'https://zenodo.org'
@@ -12,7 +13,10 @@ BASE_SANDBOX_URL = 'https://sandbox.zenodo.org'
 def get_logger():
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+    formatter = logging.Formatter('%(asctime)s [zenodo_delete] %(levelname)s %(message)s')
+    logging_fh = logging.FileHandler(os.path.join(os.getcwd(), 'zenodo_tools.log'))
+    logging_fh.setFormatter(formatter)
+    logger.addHandler(logging_fh)
     logging_stdout = logging.StreamHandler(sys.stdout)
     logging_stdout.setFormatter(formatter)
     logger.addHandler(logging_stdout)
@@ -38,9 +42,11 @@ def main():
         r = requests.delete('{}/api/deposit/depositions/{}'.format(zenodo_url, id),
                             params={'access_token': args.zenodo_token})
         if r.status_code == 204:
-            delete_logger.info('Deposition {} successfully deleted'.format(id))
-        else:
+            delete_logger.info('Deposition {} deleted successfully'.format(id))
+        elif r.status_code == 500:
             delete_logger.critical('Something went wrong. Status code: {}'.format(r.status_code))
+        else:
+            delete_logger.critical('Error. Status code: {}. {}'.format(r.status_code, r.json()))
 
 
 if __name__ == "__main__":

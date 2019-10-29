@@ -1,4 +1,4 @@
-log.txt
+*.log
 deposits_*
 .~lock.*
 .idea/

@@ -1,6 +1,105 @@
 # CAMI data
 Pointers to publicly available assembly, binning, and profiling results (with structured metadata).
 
+# Upload your results using upload tool (recommended way)
+
+## Step 1: Copy data repository
+
+* Fork (i.e. make a copy of) the data repository to your GitHub account [here](https://github.com/CAMI-challenge/data/fork).
+
+* Get a local copy of the forked repository on your computer:
+~~~BASH
+git clone https://github.com/<USERNAME>/data.git
+~~~
+
+* To be able to pull changes from the original repository, add the original data repo as an upstream remote:
+~~~BASH
+cd data
+git remote add upstream https://github.com/CAMI-challenge/data.git
+~~~
+
+## Step 2: Provide the metadata for your results
+
+* Make sure that the master branch is up to date with the original data repository:
+~~~BASH
+git checkout master
+git pull upstream master
+git push origin master
+~~~
+
+* Create and checkout a new branch for your work:
+~~~BASH
+git checkout -b update_metadata
+~~~
+
+* Enter the matadata in the tab-separated tables, e.g. in data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv. As your results will still be uploaded and do not yet have a DOI, enter the word `new` in the DOI column.
+
+Notes about the table columns:
+
+In column `SamplesUsed`, provide the numbers identifying the samples used. If multiple samples were used, you can provide ranges, e.g. 0-63, and specific samples, e.g. 0-63,70,75.
+
+Multiple files can be provided in the `FileName` column by separating them with semi-colons, e.g. file1;file2;file3.
+
+Similarly, multiple creators, ORCIDs, and affiliations can be provided with semi-colons in columns `Creator`, `ORCID`, and `Affiliation`.
+ 
+
+## Step 3: Upload your results to Zenodo
+
+* In your Zenodo account settings, go to [Applications](https://zenodo.org/account/settings/applications/) and create a personal access token with `deposit:write` permission. You may also activate the `deposit:actions` permission, or leave it deactivated to avoid accidentally publishing results. Once the token is created, store it safely!
+
+* Upload your files using the upload tool (requires Python 3):
+
+~~~BASH
+./zenodo_upload.py -h
+usage: zenodo_upload.py [-h] [--github_dir GITHUB_DIR] --files_dir FILES_DIR
+                        --zenodo_token ZENODO_TOKEN [--sandbox]                                                                                                                                                   
+                                                                                                                                                                                                                  
+CAMI Zenodo upload tool                                                                                                                                                                                           
+                                                                                                                                                                                                                  
+optional arguments:                                                                                                                                                                                               
+  -h, --help            show this help message and exit                                                                                                                                                           
+  --github_dir GITHUB_DIR                                                                                                                                                                                         
+                        GitHub directory [default: current working directory]                                                                                                                                     
+  --files_dir FILES_DIR                                                                                                                                                                                           
+                        Directory containing files to be uploaded                                                                                                                                                 
+  --zenodo_token ZENODO_TOKEN                                                                                                                                                                                     
+                        Zenodo access token
+~~~
+
+Example:
+~~~BASH
+./zenodo_upload.py --files_dir /home/me/myresults/ --zenodo_token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+~~~
+
+`--files_dir` is the path to the files of results that are being uploaded. It should be different from `--github_dir`, as those files are not supposed to be uploaded to GitHub. 
+
+`--zenodo_token` is the token that you generated, as described above.
+
+* Update the metadata tables by replacing `new` with the generated DOIs.
+
+## Step 4: Update metadata tables with DOIs and create pull request 
+
+* Update the metadata tables by replacing the word `new` with the generated DOIs.
+
+* Choose the edited files to commit, e.g. data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv:
+~~~BASH
+git add data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv
+~~~
+
+* Commit the changes with a sensible message:
+~~~BASH
+git commit -m "add results for tool x"
+~~~
+
+* Push your commit to GitHub:
+~~~BASH
+git push
+~~~
+
+* Create a pull request on GitHub for your forked data repository to the original repository.
+
+
+# Upload your results using your browser
 
 ## Step 1: Upload your results
 

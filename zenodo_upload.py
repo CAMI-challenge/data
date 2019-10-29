@@ -21,8 +21,8 @@ KEYWORDS = ['metagenomics']
 def set_loggers():
     logger = logging.getLogger('zenodo_upload')
     logger.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-    logging_fh = logging.FileHandler(os.path.join(os.getcwd(), 'zenodo_upload.log'))
+    formatter = logging.Formatter('%(asctime)s [zenodo_upload] %(levelname)s %(message)s')
+    logging_fh = logging.FileHandler(os.path.join(os.getcwd(), 'zenodo_tools.log'))
     logging_fh.setFormatter(formatter)
     logger.addHandler(logging_fh)
     logging_stdout = logging.StreamHandler(sys.stdout)
@@ -165,16 +165,19 @@ def get_deposition_id(metadata, url, access_token):
                       json={},
                       headers=headers)
     if r.status_code >= 400:
-        logging.getLogger('zenodo_upload').critical('An error occurred while creating deposition ID. Status code: {}. {}'.format(r.status_code, r.json()))
+        if r.status_code == 500:
+            logging.getLogger('zenodo_upload').critical('An error occurred while creating deposition ID. Status code: {}.'.format(r.status_code))
+        else:
+            logging.getLogger('zenodo_upload').critical('An error occurred while creating deposition ID. Status code: {}. {}'.format(r.status_code, r.json()))
         exit(1)
     return str(r.json()['id'])
 
 
-def upload_files_exist(metadata, files_in_dir):
+def upload_files_exist(metadata, files_dir, files_in_dir):
     files_to_upload = metadata['files'].split(';')
     for file in files_to_upload:
         if file not in files_in_dir:
-            logging.getLogger('zenodo_upload').warning('Skipping {}. Reason: file {} not found'.format(metadata['metadata']['title'], file))
+            logging.getLogger('zenodo_upload').warning('Skipping {}. Reason: file {} not found'.format(metadata['metadata']['title'], os.path.join(files_dir, file)))
             return False
     return True
 
@@ -192,7 +195,10 @@ def upload(deposition_id, metadata, files_dir, access_token, url):
                           data=data,
                           files=upload_file)
         if r.status_code >= 400:
-            logging.getLogger('zenodo_upload').critical('An error occurred while uploading {}. Status code: {}. {})'.format(file, r.status_code, r.json()))
+            if r.status_code == 500:
+                logging.getLogger('zenodo_upload').critical('An error occurred while uploading {}. Status code: {}.)'.format(file, r.status_code))
+            else:
+                logging.getLogger('zenodo_upload').critical('An error occurred while uploading {}. Status code: {}. {})'.format(file, r.status_code, r.json()))
             exit(1)
     logging.getLogger('zenodo_upload').info('Check your upload at {}/deposit/{}'.format(url, deposition_id))
 
@@ -212,7 +218,7 @@ def start(path, metadata_files, files_dir, files, task, access_token, url):
             continue
 
         for metadata in metadata_list:
-            if not upload_files_exist(metadata, files):
+            if not upload_files_exist(metadata, files_dir, files):
                 continue
             deposition_id = get_deposition_id(metadata, url, access_token)
             logging.getLogger('zenodo_deposits').info(deposition_id)
