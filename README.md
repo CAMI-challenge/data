@@ -3,7 +3,7 @@ Pointers to publicly available assembly, binning, and profiling results (with st
 
 # Upload your results using upload tool (recommended way)
 
-## Step 1: Copy data repository
+## Step 1: Copy the CAMI-challenge/data repository
 
 * Fork (i.e. make a copy of) the data repository to your GitHub account [here](https://github.com/CAMI-challenge/data/fork).
 
@@ -32,7 +32,8 @@ git push origin master
 git checkout -b update_metadata
 ~~~
 
-* Enter the matadata in the tab-separated tables, e.g. in data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv. As your results will still be uploaded and do not yet have a DOI, enter the word `new` in the DOI column.
+* Enter the matadata in the tab-separated tables, e.g. in [data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv](data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv). As your results will still be uploaded and do not yet have a DOI, enter the word `new` in the DOI column.\
+You may also create new directories and tsv files. Every directory with tsv files must contain a `description.txt` with the title of the respective CAMI data set. The upload tool will scan every subdirectory in the data repository for tsv files listed in the [tasks.tsv](tasks.tsv). 
 
 Notes about the table columns:
 
@@ -46,6 +47,7 @@ Similarly, multiple creators, ORCIDs, and affiliations can be provided with semi
 ## Step 3: Upload your results to Zenodo
 
 * In your Zenodo account settings, go to [Applications](https://zenodo.org/account/settings/applications/) and create a personal access token with `deposit:write` permission. You may also activate the `deposit:actions` permission, or leave it deactivated to avoid accidentally publishing results. Once the token is created, store it safely!
+
 
 * Upload your files using the upload tool (requires Python 3):
 
@@ -75,9 +77,35 @@ Example:
 
 `--zenodo_token` is the token that you generated, as described above.
 
-* Update the metadata tables by replacing `new` with the generated DOIs.
 
-## Step 4: Update metadata tables with DOIs and create pull request 
+## Step 4: Publish the uploaded results
+
+WARNING: ONCE YOUR RESULTS ARE PUBLISHED, THEY CANNOT BE DELETED!
+
+* To publish your results, you can either go to your [list of uploads](https://sandbox.zenodo.org/deposit) on the Zenodo website, select an upload, make final changes if needed, and then publish it by clicking on the publish button.
+
+* Alternatively, you can use the publish tool:
+
+~~~BASH
+./zenodo_publish.py -h
+usage: zenodo_publish.py [-h] --zenodo_token ZENODO_TOKEN [--sandbox] logfile
+
+CAMI Zenodo publish tool
+
+positional arguments:
+  logfile               Log file containing deposition IDs
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --zenodo_token ZENODO_TOKEN
+                        Zenodo access token
+  --sandbox             Sandbox test
+~~~
+
+The `logfile`, called `zenodo_deposits_DATE_TIME.log` is automatically created by the upload tool in the working directory, where `DATE_TIME` are the date and time of the upload.
+
+
+## Step 5: Update metadata tables with DOIs and create pull request 
 
 * Update the metadata tables by replacing the word `new` with the generated DOIs.
 
@@ -96,7 +124,7 @@ git commit -m "add results for tool x"
 git push
 ~~~
 
-* Create a pull request on GitHub for your forked data repository to the original repository.
+* Create a pull request on GitHub for your forked data repository to the original repository (see [Creating a pull request from a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork)).
 
 
 # Upload your results using your browser
