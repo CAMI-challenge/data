@@ -130,13 +130,16 @@ def get_metadata_list(path, file, task_description, dataset_description):
 
         row_copy= row.copy().drop(COMMON_FIELDS).dropna()
         if 'Description' in row_copy.index:
-            description = row_copy.pop('Description')
+            description = row_copy.pop('Description') + '<br>'
         else:
             description = ''
+        description += '<strong>Software: </strong>' + row['Software'] + '<br>'
+        description += '<strong>SoftwareVersion: </strong>' + str(row['Version']) + '<br>'
+        description += '<strong>DataURL: </strong> https://data.cami-challenge.org/participate'
         for item in row_copy.iteritems():
             if len(description) > 0:
                 description = description + '<br>'
-            description = description + str(item[0]) + ': ' + str(item[1])
+            description = description + str('<strong>' + item[0]) + ':</strong> ' + str(item[1])
 
         creators_metadata = get_creators_metadata(row)
         metadata = {
@@ -149,7 +152,7 @@ def get_metadata_list(path, file, task_description, dataset_description):
                 'access_right': 'open',
                 'license': 'cc-by',
                 'version': row['Version'],
-                'keywords': KEYWORDS
+                'keywords': KEYWORDS + [task_description, dataset_description]
                 },
             'files': row['FileName']
             }

@@ -82,9 +82,9 @@ Example:
 
 WARNING: ONCE YOUR RESULTS ARE PUBLISHED, THEY CANNOT BE DELETED!
 
-* To publish your results, you can either go to your [list of uploads](https://sandbox.zenodo.org/deposit) on the Zenodo website, select an upload, make final changes if needed, and then publish it by clicking on the publish button.
+* To publish your results, you can either go to your [list of uploads](https://zenodo.org/deposit) on the Zenodo website, select an upload, make final changes if needed, and then publish it by clicking on the publish button.
 
-* Alternatively, you can use the publish tool:
+* Alternatively, you can use the publish tool (remember to activate the option `deposit:actions` for your token on Zenodo):
 
 ~~~BASH
 ./zenodo_publish.py -h
