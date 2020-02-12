@@ -32,7 +32,7 @@ git push origin master
 git checkout -b update_metadata
 ~~~
 
-* Enter the matadata in the tab-separated tables, e.g. in [data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv](data/CAMI2/toy/mouse_gut/taxonomic_profiling.tsv). As your results will still be uploaded and do not yet have a DOI, enter the word `new` in the DOI column.\
+* Enter the matadata in the appropriate tab-separated table, e.g. in [CAMI2/toy/mouse_gut/taxonomic_profiling.tsv](CAMI2/toy/mouse_gut/taxonomic_profiling.tsv). As your results will still be uploaded and do not yet have a DOI, enter the word `new` in the DOI column.\
 You may also create new directories and tsv files. Every directory with tsv files must contain a `description.txt` with the title of the respective CAMI data set. The upload tool will scan every subdirectory in the data repository for tsv files listed in [tasks.tsv](tasks.tsv). 
 
 Notes about the table columns:
